@@ -590,7 +590,7 @@
 
             this.breadCrumbView.collection.reset();
             this.breadCrumbView.collection.add([
-                {text:"Home", href:"/"},
+                {text:"Home", href:""},
                 {text:"Manage Clients", href:"admin/manage/#clients"}
             ]);
 
@@ -603,9 +603,9 @@
 
             this.breadCrumbView.collection.reset();
             this.breadCrumbView.collection.add([
-                {text:"Home", href:"/"},
+                {text:"Home", href:""},
                 {text:"Manage Clients", href:"admin/manage/#clients"},
-                {text:"New", href:"#"}
+                {text:"New", href:""}
             ]);
 
         	var client = new ClientModel();
@@ -626,9 +626,9 @@
 
             this.breadCrumbView.collection.reset();
             this.breadCrumbView.collection.add([
-                {text:"Home", href:"/"},
+                {text:"Home", href:""},
                 {text:"Manage Clients", href:"admin/manage/#clients"},
-                {text:"Edit", href:"#"}
+                {text:"Edit", href:"admin/manage/#client/" + id}
             ]);
 
             var client = this.clientList.get(id);
