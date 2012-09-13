@@ -551,10 +551,10 @@
     var AppRouter = Backbone.Router.extend({
 
         routes:{
-            "clients":"listClients",
-            "client/new":"newClient",
-            "client/:id":"editClient",
-            "white_list":"whiteList"
+            "admin/manage/clients":"listClients",
+            "admin/manage/client/new":"newClient",
+            "admin/manage/client/:id":"editClient",
+            "admin/manage/white_list":"whiteList"
         },
 
         initialize:function () {
@@ -576,7 +576,7 @@
         startAfter:function (collections) {
             // Start history when required collections are loaded
             var start = _.after(collections.length, _.once(function () {
-                Backbone.history.start()
+                Backbone.history.start({pushState: true})
             }));
             _.each(collections, function (collection) {
                 collection.bind('reset', start, Backbone.history)
@@ -673,7 +673,12 @@
         jQuery.ajaxSetup({async:true});
         app = new AppRouter();
 
-
+        // grab and re-map all hash-based URLs on the site to go through the router
+        $('a[href*="#"]').on('click', function(event) {
+        	event.preventDefault();
+        	app.navigate(this.hash.slice(1), {trigger: true});
+        });
+        
     });
 
 
