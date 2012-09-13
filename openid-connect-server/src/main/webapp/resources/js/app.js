@@ -578,8 +578,7 @@
             var start = _.after(collections.length, _.once(function () {
             	var baseUrl = $('base').attr('href');
             	
-            	
-                Backbone.history.start({pushState: true, root: baseUrl + '/admin/manage/'});
+                Backbone.history.start({pushState: true, root: baseUrl + 'admin/manage/'});
 
             }));
             _.each(collections, function (collection) {
