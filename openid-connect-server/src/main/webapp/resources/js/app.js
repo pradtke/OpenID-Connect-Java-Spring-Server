@@ -551,10 +551,10 @@
     var AppRouter = Backbone.Router.extend({
 
         routes:{
-            "admin/manage/clients":"listClients",
-            "admin/manage/client/new":"newClient",
-            "admin/manage/client/:id":"editClient",
-            "admin/manage/white_list":"whiteList"
+            "clients":"listClients",
+            "client/new":"newClient",
+            "client/:id":"editClient",
+            "white_list":"whiteList"
         },
 
         initialize:function () {
@@ -576,7 +576,11 @@
         startAfter:function (collections) {
             // Start history when required collections are loaded
             var start = _.after(collections.length, _.once(function () {
-                Backbone.history.start({pushState: true})
+            	var baseUrl = $('base').attr('href');
+            	
+            	
+                Backbone.history.start({pushState: true, root: baseUrl + '/admin/manage/'});
+
             }));
             _.each(collections, function (collection) {
                 collection.bind('reset', start, Backbone.history);
