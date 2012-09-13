@@ -83,7 +83,7 @@
                 model = new URIModel({item:input_value});
             } else {
                 model = new Backbone.Model({item:input_value});
-                model.validate = function() { if(!this.get("item")) return "value can't be null" };
+                model.validate = function() { if(!this.get("item")) return "value can't be null"; };
             }
 
             // if it's valid and doesn't already exist
@@ -579,7 +579,7 @@
                 Backbone.history.start({pushState: true})
             }));
             _.each(collections, function (collection) {
-                collection.bind('reset', start, Backbone.history)
+                collection.bind('reset', start, Backbone.history);
             });
         },
 
