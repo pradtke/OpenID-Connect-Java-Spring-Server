@@ -7,12 +7,12 @@
                 <li class="nav-header">Administrative</li>
                 <li><a href="admin/manage/#clients">Manage Clients</a></li>
                 <li><a href="admin/manage/#white_list">White Lists</a></li>
-                <li><a href="#">Black Lists</a></li>
+                <li><a href="admin/manage/#black_list">Black Lists</a></li>
             </security:authorize>
             <li class="nav-header">Personal</li>
-            <li><a href="#">Manage Sites</a></li>
-            <li><a href="#">Manage Active Tokens</a></li>
-            <li><a href="#">Manage Profiles</a></li>
+            <li><a href="/">Manage Sites</a></li>
+            <li><a href="/">Manage Active Tokens</a></li>
+            <li><a href="/">Manage Profiles</a></li>
         </ul>
     </div><!--/.well -->
 </div><!--/span-->

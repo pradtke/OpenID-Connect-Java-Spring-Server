@@ -90,7 +90,7 @@
                 model = new URIModel({item:input_value});
             } else {
                 model = new Backbone.Model({item:input_value});
-                model.validate = function() { if(!this.get("item")) return "value can't be null" };
+                model.validate = function() { if(!this.get("item")) return "value can't be null"; };
             }
 
             // if it's valid and doesn't already exist
@@ -584,10 +584,13 @@
         startAfter:function (collections) {
             // Start history when required collections are loaded
             var start = _.after(collections.length, _.once(function () {
-                Backbone.history.start()
+            	var baseUrl = $.url($('base').attr('href'));
+            	
+                Backbone.history.start({pushState: true, root: baseUrl.attr('relative') + 'admin/manage/'});
+
             }));
             _.each(collections, function (collection) {
-                collection.bind('reset', start, Backbone.history)
+                collection.bind('reset', start, Backbone.history);
             });
         },
 
@@ -595,7 +598,7 @@
 
             this.breadCrumbView.collection.reset();
             this.breadCrumbView.collection.add([
-                {text:"Home", href:"/"},
+                {text:"Home", href:""},
                 {text:"Manage Clients", href:"admin/manage/#clients"}
             ]);
 
@@ -608,9 +611,9 @@
 
             this.breadCrumbView.collection.reset();
             this.breadCrumbView.collection.add([
-                {text:"Home", href:"/"},
+                {text:"Home", href:""},
                 {text:"Manage Clients", href:"admin/manage/#clients"},
-                {text:"New", href:"#"}
+                {text:"New", href:""}
             ]);
 
         	var client = new ClientModel();
@@ -631,9 +634,9 @@
 
             this.breadCrumbView.collection.reset();
             this.breadCrumbView.collection.add([
-                {text:"Home", href:"/"},
+                {text:"Home", href:""},
                 {text:"Manage Clients", href:"admin/manage/#clients"},
-                {text:"Edit", href:"#"}
+                {text:"Edit", href:"admin/manage/#client/" + id}
             ]);
 
             var client = this.clientList.get(id);
@@ -680,7 +683,12 @@
         jQuery.ajaxSetup({async:true});
         app = new AppRouter();
 
-
+        // grab and re-map all hash-based URLs on the site to go through the router
+        $('a[href*="#"]').on('click', function(event) {
+        	event.preventDefault();
+        	app.navigate(this.hash.slice(1), {trigger: true});
+        });
+        
     });
 
 

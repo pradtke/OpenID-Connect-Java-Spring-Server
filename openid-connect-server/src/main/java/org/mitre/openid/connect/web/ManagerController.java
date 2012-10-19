@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("")
 @PreAuthorize("hasRole('ROLE_USER')") // TODO: this probably shouldn't be here
 public class ManagerController {
 
@@ -46,7 +46,7 @@ public class ManagerController {
         return "home";
     }
 
-    @RequestMapping("admin/manage")
+    @RequestMapping("admin/manage/**")
     public String showClientManager() {
         return "admin/manage";
     }
